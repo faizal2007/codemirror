@@ -1,21 +1,6 @@
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
 
-
-if(typeof window != 'undefined'){
-// code that produce error
-  let userAgent = navigator.userAgent
-  let platform = navigator.platform
-}
-else {
-  let navigator = {
-    userAgent: '',
-    platform: '',
-    vendor: '',
-    maxTouchPoints: 0
-  }
-}
-
 let userAgent = navigator.userAgent
 let platform = navigator.platform
 
