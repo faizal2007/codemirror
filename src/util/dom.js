@@ -22,12 +22,14 @@ export function removeChildrenAndAdd(parent, e) {
 }
 
 export function elt(tag, content, className, style) {
-  let e = document.createElement(tag)
-  if (className) e.className = className
-  if (style) e.style.cssText = style
-  if (typeof content == "string") e.appendChild(document.createTextNode(content))
-  else if (content) for (let i = 0; i < content.length; ++i) e.appendChild(content[i])
-  return e
+  if(typeof window != 'undefined'){
+      let e = document.createElement(tag)
+      if (className) e.className = className
+      if (style) e.style.cssText = style
+      if (typeof content == "string") e.appendChild(document.createTextNode(content))
+      else if (content) for (let i = 0; i < content.length; ++i) e.appendChild(content[i])
+      return e
+  }
 }
 // wrapper for elt, which removes the elt from the accessibility tree
 export function eltP(tag, content, className, style) {
@@ -37,21 +39,23 @@ export function eltP(tag, content, className, style) {
 }
 
 export let range
-if (document.createRange) range = function(node, start, end, endNode) {
-  let r = document.createRange()
-  r.setEnd(endNode || node, end)
-  r.setStart(node, start)
-  return r
-}
-else range = function(node, start, end) {
-  let r = document.body.createTextRange()
-  try { r.moveToElementText(node.parentNode) }
-  catch(e) { return r }
-  r.collapse(true)
-  r.moveEnd("character", end)
-  r.moveStart("character", start)
-  return r
-}
+ if(typeof window != 'undefined'){
+    if (document.createRange) range = function(node, start, end, endNode) {
+      let r = document.createRange()
+      r.setEnd(endNode || node, end)
+      r.setStart(node, start)
+      return r
+    }
+    else range = function(node, start, end) {
+      let r = document.body.createTextRange()
+      try { r.moveToElementText(node.parentNode) }
+      catch(e) { return r }
+      r.collapse(true)
+      r.moveEnd("character", end)
+      r.moveStart("character", start)
+      return r
+    }
+ }
 
 export function contains(parent, child) {
   if (child.nodeType == 3) // Android browser always returns false when child is a textnode
