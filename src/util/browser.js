@@ -2,8 +2,11 @@
 // detected are enabled based on userAgent etc sniffing.
 // adfasfasdfasdf
 
-let userAgent = navigator.userAgent
-let platform = navigator.platform
+//let userAgent = navigator.userAgent
+//let platform = navigator.platform
+
+let userAgent = ''
+let platform = ''
 
 export let gecko = /gecko\/\d/i.test(userAgent)
 let ie_upto10 = /MSIE \d/.test(userAgent)
