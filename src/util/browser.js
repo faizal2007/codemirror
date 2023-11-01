@@ -8,6 +8,19 @@
 let userAgent = ''
 let platform = ''
 
+if(typeof window != 'undefined'){
+  userAgent = navigator.userAgent
+  platform = navigator.platform
+}
+else {
+  navigator = {
+    userAgent: '',
+    platform: '',
+    vendor: '',
+    maxTouchPoints: 0
+  }
+}
+
 export let gecko = /gecko\/\d/i.test(userAgent)
 let ie_upto10 = /MSIE \d/.test(userAgent)
 let ie_11up = /Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(userAgent)
