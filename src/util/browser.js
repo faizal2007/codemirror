@@ -1,5 +1,6 @@
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
+// adfasfasdfasdf
 
 let userAgent = navigator.userAgent
 let platform = navigator.platform
