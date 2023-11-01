@@ -1,7 +1,9 @@
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
-let userAgent = navigator.userAgent
-let platform = navigator.platform
+if(typeof window != 'undefined'){
+  let userAgent = navigator.userAgent
+  let platform = navigator.platform
+}
 
 export let gecko = /gecko\/\d/i.test(userAgent)
 let ie_upto10 = /MSIE \d/.test(userAgent)
