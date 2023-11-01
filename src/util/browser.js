@@ -1,24 +1,8 @@
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
-// adfasfasdfasdf
-
-//let userAgent = navigator.userAgent
-//let platform = navigator.platform
-
-let userAgent = ''
-let platform = ''
-
 if(typeof window != 'undefined'){
-  userAgent = navigator.userAgent
-  platform = navigator.platform
-}
-else {
-  navigator = {
-    userAgent: '',
-    platform: '',
-    vendor: '',
-    maxTouchPoints: 0
-  }
+  let userAgent = navigator.userAgent
+  let platform = navigator.platform
 }
 
 export let gecko = /gecko\/\d/i.test(userAgent)
@@ -32,7 +16,9 @@ let qtwebkit = webkit && /Qt\/\d+\.\d+/.test(userAgent)
 export let chrome = !edge && /Chrome\/(\d+)/.exec(userAgent)
 export let chrome_version = chrome && +chrome[1]
 export let presto = /Opera\//.test(userAgent)
-export let safari = /Apple Computer/.test(navigator.vendor)
+if(typeof window != 'undefined'){
+  export let safari = /Apple Computer/.test(navigator.vendor)
+}
 export let mac_geMountainLion = /Mac OS X 1\d\D([8-9]|\d\d)\D/.test(userAgent)
 export let phantom = /PhantomJS/.test(userAgent)
 
