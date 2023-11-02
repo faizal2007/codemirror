@@ -58,16 +58,39 @@ export let splitLinesAuto = "\n\nb".split(/\n/).length != 3 ? string => {
   return result
 } : string => string.split(/\r\n?|\n/)
 
-export let hasSelection = window.getSelection ? te => {
-  try { return te.selectionStart != te.selectionEnd }
-  catch(e) { return false }
-} : te => {
-  let range
-  try {range = te.ownerDocument.selection.createRange()}
-  catch(e) {}
-  if (!range || range.parentElement() != te) return false
-  return range.compareEndPoints("StartToEnd", range) != 0
+// Define hasSelection function conditionally based on the environment
+let hasSelection;
+
+if (typeof window !== 'undefined') {
+  hasSelection = window.getSelection ? te => {
+    try { return te.selectionStart != te.selectionEnd }
+    catch(e) { return false }
+  } : te => {
+    let range
+    try {range = te.ownerDocument.selection.createRange()}
+    catch(e) {}
+    if (!range || range.parentElement() != te) return false
+    return range.compareEndPoints("StartToEnd", range) != 0
+  }
+} else {
+  // If not in a browser environment (window is not defined), you can provide a fallback or do nothing
+  // For example, you can set hasSelection to a default function or value for non-browser environments.
+  hasSelection = false; // A default implementation for non-browser environments
 }
+
+// Export the hasSelection function
+export { hasSelection };
+
+// export let hasSelection = window.getSelection ? te => {
+//   try { return te.selectionStart != te.selectionEnd }
+//   catch(e) { return false }
+// } : te => {
+//   let range
+//   try {range = te.ownerDocument.selection.createRange()}
+//   catch(e) {}
+//   if (!range || range.parentElement() != te) return false
+//   return range.compareEndPoints("StartToEnd", range) != 0
+// }
 
 export let hasCopyEvent = (() => {
   let e = elt("div")
