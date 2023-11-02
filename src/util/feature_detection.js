@@ -5,9 +5,11 @@ import { ie, ie_version } from "./browser.js"
 export let dragAndDrop = function() {
   // There is *some* kind of drag-and-drop support in IE6-8, but I
   // couldn't get it to work yet.
-  if (ie && ie_version < 9) return false
-  let div = elt('div')
-  return "draggable" in div || "dragDrop" in div
+  if(typeof window != 'undefined'){
+    if (ie && ie_version < 9) return false
+    let div = elt('div')
+    return "draggable" in div || "dragDrop" in div
+  }
 }()
 
 let zwspSupported
