@@ -1,10 +1,21 @@
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
-if(typeof window != 'undefined'){
-  let userAgent = navigator.userAgent
-  let platform = navigator.platform
-}
+ var userAgent = '';
+  var platform = '';
 
+  let navigator = {}
+  if(typeof window != 'undefined'){
+    userAgent = navigator.userAgent;
+    platform = navigator.platform;
+  }
+  else {
+    navigator = {
+      userAgent: '',
+      platform: '',
+      vendor: '',
+      maxTouchPoints: 0
+    };
+  }
 export let gecko = /gecko\/\d/i.test(userAgent)
 let ie_upto10 = /MSIE \d/.test(userAgent)
 let ie_11up = /Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(userAgent)
