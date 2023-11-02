@@ -27,9 +27,8 @@ let qtwebkit = webkit && /Qt\/\d+\.\d+/.test(userAgent)
 export let chrome = !edge && /Chrome\/(\d+)/.exec(userAgent)
 export let chrome_version = chrome && +chrome[1]
 export let presto = /Opera\//.test(userAgent)
-if(typeof window != 'undefined'){
-  export let safari = /Apple Computer/.test(navigator.vendor)
-}
+export let safari = /Apple Computer/.test(navigator.vendor)
+
 export let mac_geMountainLion = /Mac OS X 1\d\D([8-9]|\d\d)\D/.test(userAgent)
 export let phantom = /PhantomJS/.test(userAgent)
 
