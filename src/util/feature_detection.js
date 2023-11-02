@@ -91,13 +91,19 @@ export { hasSelection };
 //   if (!range || range.parentElement() != te) return false
 //   return range.compareEndPoints("StartToEnd", range) != 0
 // }
-
-export let hasCopyEvent = (() => {
-  let e = elt("div")
-  if ("oncopy" in e) return true
-  e.setAttribute("oncopy", "return;")
-  return typeof e.oncopy == "function"
-})()
+let hasCopyEvent
+if (typeof window !== 'undefined') {
+  hasCopyEvent = (() => {
+    let e = elt("div")
+    if ("oncopy" in e) return true
+    e.setAttribute("oncopy", "return;")
+    return typeof e.oncopy == "function"
+  })()
+}
+else {
+  hasCopyEvent = false
+}
+export { hasCopyEvent };
 
 let badZoomedRects = null
 export function hasBadZoomedRects(measure) {
